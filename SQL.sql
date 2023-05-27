@@ -88,9 +88,25 @@ WHERE price <=
     FROM book) + 150
 ORDER BY price;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
+Выведите идентификатор комнаты (поле room_id), среднюю стоимость за один день аренды 
+(поле price, для вывода используйте псевдоним avg_price), а также количество резерваций этой 
+комнаты (используйте псевдоним count). Полученный результат отсортируйте в порядке убывания 
+сначала по количеству резерваций, а потом по средней стоимости.
+SELECT room_id,
+   AVG(price) AS avg_price,
+   COUNT(user_id) AS count
+FROM Reservations  
+GROUP BY room_id
+ORDER BY count DESC, avg_price DESC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Выведите типы комнат (поле home_type) и разницу между самым дорогим и самым дешевым 
+представителем данного типа. В итоговую выборку включите только те типы жилья, количество 
+которых в таблице Rooms больше или равно 2
+SELECT home_type,
+   MAX(price) - MIN(price) AS difference
+FROM Rooms
+GROUP BY (home_type) 
+HAVING COUNT(home_type) >= 2
 
 
 
