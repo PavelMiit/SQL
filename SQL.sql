@@ -107,7 +107,33 @@ SELECT home_type,
 FROM Rooms
 GROUP BY (home_type) 
 HAVING COUNT(home_type) >= 2
-
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Выведите названия продуктов, которые покупал член семьи со статусом "son". Для получения 
+выборки вам нужно объединить таблицу Payments с таблицей FamilyMembers по полям family_member 
+и member_id, а также с таблицей Goods по полям good и good_id.
+SELECT good_name 
+FROM FamilyMembers
+INNER JOIN Payments
+    ON FamilyMembers.member_id = Payments.family_member
+INNER JOIN Goods
+    ON Payments.good = Goods.good_id 
+WHERE status = 'son'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Выведите идентификатор (поле room_id) и среднюю оценку комнаты (поле rating, для вывода 
+используйте псевдоним avg_score), составленную на основании отзывов из таблицы Reviews.
+SELECT room_id, AVG(rating) AS avg_score
+FROM Reservations
+INNER JOIN Reviews
+    ON Reservations.id = Reviews.reservation_id
+GROUP BY room_id 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+В какие города летал Bruce Willis
+SELECT town_to
+FROM Trip
+INNER JOIN Pass_in_trip
+    ON Trip.id = Pass_in_trip.trip 
+INNER JOIN Passenger 
+    ON Pass_in_trip.passenger = Passenger.id
+WHERE name = 'Bruce Willis'
 
 
