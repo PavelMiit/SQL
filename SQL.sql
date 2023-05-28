@@ -135,5 +135,14 @@ INNER JOIN Pass_in_trip
 INNER JOIN Passenger 
     ON Pass_in_trip.passenger = Passenger.id
 WHERE name = 'Bruce Willis'
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Определить, кто из членов семьи покупал картошку (potato)
+SELECT status  
+FROM FamilyMembers
+INNER JOIN Payments
+    ON FamilyMembers.member_id = Payments.family_member 
+INNER  JOIN Goods
+    ON Payments.good = Goods.good_id
+WHERE good_name = 'potato'
+GROUP BY status
 
