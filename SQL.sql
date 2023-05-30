@@ -145,4 +145,18 @@ INNER  JOIN Goods
     ON Payments.good = Goods.good_id
 WHERE good_name = 'potato'
 GROUP BY status
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Выведите всю информацию о пользователе из таблицы Users, кто является владельцем самого 
+дорого жилья (таблица Rooms).
+SELECT Users.*
+FROM Users 
+INNER JOIN Rooms
+    ON Users.id = Rooms.owner_id 
+WHERE price = (SELECT MAX(price) FROM Rooms)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Во сколько начинается 4-ый учебный предмет по расписанию ?
+SELECT DISTINCT (start_pair) 
+FROM Timepair
+INNER JOIN Schedule
+    ON Timepair.id = Schedule.number_pair
+WHERE number_pair = 4
